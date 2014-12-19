@@ -9,7 +9,7 @@ import java.util.*;
 
 
 
-public class Test2{
+public class KingdomBuilder{
 
 	public static Boolean loadGame = false;
 	public static Boolean newGame = false;
