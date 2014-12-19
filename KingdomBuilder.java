@@ -18,10 +18,22 @@ public class KingdomBuilder{
 	public static Scanner input = new Scanner(System.in);
 	public static String error;
 	public static String playerKingdomName = "";
+	public static Boolean myKingdomMenu = false;
+	public static int day = 0;
+	public static int month = 0;
+	public static int year = 0;
+	public static double food = 0;
+	public static double wood = 0;
+	public static double gold = 0;
+	public static int turns = 0;
+	public static float energy = 0;
+	public static int population = 0;
+	public static float kingdomSize = 0;
+
 
 	public static void main(String[] args){
 
-		System.out.println("*******************\n" + "KINGDOM BUILDER\n" + "*******************\n");
+		System.out.println("******************************\n" + "       KINGDOM BUILDER\n" + "******************************\n");
 
 		mainMenu();
 		
@@ -33,11 +45,10 @@ public class KingdomBuilder{
 		System.out.println("\n*****************************\n" + "         " +  "Main Menu"
 			+ "\n*****************************\n");
 		System.out.println("       ** New_Game **\n\n" + "       ** Load_Game **\n\n" + 
-			"       ** Quit_Game ** ");
+			"       ** Quit_Game **\n\n ");
 
 		while(retryMenu){
 			retryMenu = false;
-			System.out.println("\n\nEnter an option: ");
 			selectedOption = input.next();
 			try{
 				if(selectedOption.equals("New_Game")){
@@ -73,10 +84,9 @@ public class KingdomBuilder{
 		while(newGame){
 			Boolean retryNewGame = true;
 			System.out.println("\n****************************\n" +  "          New Game" + "\n****************************\n");
-			System.out.println("      ** New_Kingdom **\n\n" + "       ** Main_Menu **\n");
+			System.out.println("      ** New_Kingdom **\n\n" + "       ** Main_Menu **\n\n");
 			while(retryNewGame){
 				retryNewGame = false;
-				System.out.println("\n\nEnter an option: ");
 				selectedOption = input.next();
 				try{
 					if(selectedOption.equals("New_Kingdom")){
@@ -99,7 +109,7 @@ public class KingdomBuilder{
 					else{
 						System.out.println("\nIncorrect menu option selected. Please try again.");
 						System.out.println("\n****************************\n" +  "          New Game" + "\n****************************\n");
-						System.out.println("      ** New_Kingdom **\n\n" + "       ** Main_Menu **\n");
+						System.out.println("      ** New_Kingdom **\n\n" + "       ** Main_Menu **\n\n");
 						retryNewGame = true;
 					}
 				}catch(NullPointerException s){
@@ -122,26 +132,20 @@ public class KingdomBuilder{
 
 	private static void playGame(){
 
-		System.out.println("\nGenerating plots....");
+		
 		System.out.println("\n******************************\n" + "          " + playerKingdomName + 
 			"\n******************************\n");
-		System.out.println("         ** Plots **\n");
-		System.out.println("       ** Resources **\n");
-		System.out.println("         ** Menu **\n");
+		System.out.println("      ** My_Kingdom **\n");
+		System.out.println("         ** Menu **\n\n");
 
 		Boolean retryOption = true;
 
 		while(retryOption){
-			System.out.println("\n\nEnter an option: ");
 			selectedOption = input.next();
 			retryOption = false;
-			if(selectedOption.equals("Plots")){
-				System.out.println("COMING SOON!");
+			if(selectedOption.equals("My_Kingdom")){
 				retryOption = false;
-			}
-			else if(selectedOption.equals("Resources")){
-				System.out.println("\nCOMING SOON!");
-				retryOption = false;
+				myKingdomMenu();
 			}
 			else if(selectedOption.equals("Menu")){
 				retryOption = false;
@@ -151,12 +155,11 @@ public class KingdomBuilder{
 				System.out.println("Incorrect option. Try again.");
 				System.out.println("\n******************************\n" + "          " + playerKingdomName + 
 					"\n******************************\n");
-				System.out.println("         ** Plots **\n");
-				System.out.println("       ** Resources **\n");
-				System.out.println("         ** Menu **\n");
+				System.out.println("      ** My_Kingdom **\n");
+				System.out.println("         ** Menu **\n\n");
+				retryOption = true;
 			}
 		}
-
 	}
 
 	private static void gameMenu(){
@@ -168,10 +171,9 @@ public class KingdomBuilder{
 		System.out.println("        -- Menu --\n ");
 		System.out.println("    ** Return_To_Game **\n");
 		System.out.println("        ** Save **\n");
-		System.out.println("        ** Quit **\n");
+		System.out.println("        ** Quit **\n\n");
 
 		while(inGameMenu){
-			System.out.println("\n\nEnter an option: ");
 			selectedOption = input.next();
 			if(selectedOption.equals("Return_To_Game")){
 				playGame();
@@ -192,13 +194,75 @@ public class KingdomBuilder{
 				System.out.println("        -- Menu --\n ");
 				System.out.println("    ** Return_To_Game **\n");
 				System.out.println("        ** Save **\n");
-				System.out.println("        ** Quit **\n");
+				System.out.println("        ** Quit **\n\n");
+				inGameMenu = true;
 			}
 
 		}
 
+	}
+
+	private static void myKingdomMenu(){
+
+		myKingdomMenu = true;		
+		while(myKingdomMenu){
+			System.out.println("\n******************************\n" + "         My Kingdom" + "\n******************************\n");
+			System.out.println("Day: " + day + " Month: " + month +  " Year: " + year);
+			System.out.println("Turns: " + turns + "\n\n");
+			System.out.println("       ** Actions **\n");
+			System.out.println("      ** Resources **\n");
+			System.out.println("        ** Stats **\n");
+			System.out.println("        ** Back **\n\n");
+			selectedOption = input.next();
+			if(selectedOption.equals("Actions")){
+				myKingdomMenu = false;
+			}
+			else if(selectedOption.equals("Resources")){
+				myKingdomMenu = false;
+			}
+			else if(selectedOption.equals("Stats")){
+				myKingdomMenu = false;
+				statsMenu();
+			}
+			else if(selectedOption.equals("Back")){
+				myKingdomMenu = false;
+				playGame();
+			}
+			else{
+				myKingdomMenu = true;
+			System.out.println("Incorrect option. Try again\n");
+			System.out.println("\n******************************\n" + "         My Kingdom" + "\n******************************\n");
+			System.out.println("       ** Actions **\n");
+			System.out.println("      ** Resources **\n");
+			System.out.println("        ** Stats **\n");
+			System.out.println("         ** Back **\n\n");
+			}	
+		}
 
 	}
 
+	private static void statsMenu(){
 
+		Boolean inStatsMenu = true;
+
+		while(inStatsMenu){
+			System.out.println("\n******************************\n" + "          " + playerKingdomName + 
+			"\n******************************\n");
+
+			System.out.println("Day: " + day + " Month: " + month +  " Year: " + year);
+			System.out.println("Population: " + population + "\n" + "Kingdom Size: " + kingdomSize);
+			System.out.println("Gold: " + gold); 
+			System.out.println("Food: " + food);
+			System.out.println("Wood: " + wood +"\n\n");
+			System.out.println("       ** Back **\n\n");
+			selectedOption = input.next();
+			if(selectedOption.equals("Back")){
+				inStatsMenu = false;
+				myKingdomMenu();
+			}
+			else{
+				inStatsMenu = true;
+			}
+		}
+	}
 }
