@@ -8,12 +8,14 @@ import java.io.FileReader;
 import java.util.*;
 
 
-public class KingdomBuilder{
+
+public class Test2{
 
 	public static Boolean loadGame = false;
 	public static Boolean newGame = false;
 	public static Boolean inGameMenu = false;
 	public static Boolean gameStart;
+	public static Boolean timerStart = true;
 	public static String selectedOption; 
 	public static Scanner input = new Scanner(System.in);
 	public static String error;
@@ -25,10 +27,12 @@ public class KingdomBuilder{
 	public static double food = 0;
 	public static double wood = 0;
 	public static double gold = 0;
-	public static int turns = 0;
 	public static float energy = 0;
 	public static int population = 0;
 	public static float kingdomSize = 0;
+	public static int seconds = 0;
+	public static int minutes = 0;
+	public static Timer timer = new Timer();
 
 
 	public static void main(String[] args){
@@ -132,6 +136,7 @@ public class KingdomBuilder{
 
 	private static void playGame(){
 
+
 		
 		System.out.println("\n******************************\n" + "          " + playerKingdomName + 
 			"\n******************************\n");
@@ -204,20 +209,17 @@ public class KingdomBuilder{
 
 	private static void myKingdomMenu(){
 
-		myKingdomMenu = true;		
+		timer();	
+		myKingdomMenu = true;	
 		while(myKingdomMenu){
 			System.out.println("\n******************************\n" + "         My Kingdom" + "\n******************************\n");
 			System.out.println("Day: " + day + " Month: " + month +  " Year: " + year);
 			System.out.println("Turns: " + turns + "\n\n");
 			System.out.println("       ** Actions **\n");
-			System.out.println("      ** Resources **\n");
 			System.out.println("        ** Stats **\n");
 			System.out.println("        ** Back **\n\n");
 			selectedOption = input.next();
 			if(selectedOption.equals("Actions")){
-				myKingdomMenu = false;
-			}
-			else if(selectedOption.equals("Resources")){
 				myKingdomMenu = false;
 			}
 			else if(selectedOption.equals("Stats")){
@@ -233,7 +235,6 @@ public class KingdomBuilder{
 			System.out.println("Incorrect option. Try again\n");
 			System.out.println("\n******************************\n" + "         My Kingdom" + "\n******************************\n");
 			System.out.println("       ** Actions **\n");
-			System.out.println("      ** Resources **\n");
 			System.out.println("        ** Stats **\n");
 			System.out.println("         ** Back **\n\n");
 			}	
@@ -265,4 +266,26 @@ public class KingdomBuilder{
 			}
 		}
 	}
+
+	private static void timer(){
+
+		timer.schedule(new TimerTask(){
+
+			public void run(){
+
+				seconds++;
+				if(seconds == 60){
+					minutes++;
+					seconds = 0;
+				}
+
+				if(minutes == 1){
+					day++;
+					minutes = 0;
+				}		
+			}
+		}, 1* 1000, 1* 1000);
+
+	}
+
 }
